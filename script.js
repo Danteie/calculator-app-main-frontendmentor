@@ -9,6 +9,13 @@ function display(){
     document.getElementById('display').innerHTML = currentlyOnDisplay;
 }
 
+function saveControl(){
+    save.splice(0,3)
+    save.unshift(result);
+    currentlyOnDisplay = result;
+    display();
+    currentlyOnDisplay = '';
+}
 
 function press(key){
     const keys = document.getElementsByClassName("keys");
@@ -40,61 +47,39 @@ function calculation(){
         console.log('inicijalni save ' + save);
     
         for (let index = 0; index < save.length; index++) {
-
             // plus
             if (save[index] == '+') {
                 if(save[index-1] != undefined && save[index+1] != undefined ){
                     result = save[index-1] + save[index+1];
-                    save.splice(0,3)
-                    save.unshift(result);
-                    currentlyOnDisplay = result;
-                    display();
-                    currentlyOnDisplay = '';
+                    saveControl();
                 }
             }
             // minus
             if (save[index] == '-') {
                 if(save[index-1] != undefined && save[index+1] != undefined ){
                     result = save[index-1] - save[index+1];
-                    save.splice(0,3)
-                    save.unshift(result);
-                    currentlyOnDisplay = result;
-                    display();
-                    currentlyOnDisplay = '';
+                    saveControl();
                 }
             }
-
             //puta
             if (save[index] == 'x') {
                 if(save[index-1] != undefined && save[index+1] != undefined ){
                     result = save[index-1] * save[index+1];
-                    save.splice(0,3)
-                    save.unshift(result);
-                    currentlyOnDisplay = result;
-                    display();
-                    currentlyOnDisplay = '';
+                    saveControl();
                 }
             }
             //djeljeno
-            for (let index = 0; index < save.length; index++) {
-                if (save[index] == '/') {
-                    if(save[index-1] != undefined && save[index+1] != undefined ){
-                        result = save[index-1] / save[index+1];
-                        save.splice(0,3)
-                        save.unshift(result);
-                        currentlyOnDisplay = result;
-                        display();
-                        currentlyOnDisplay = '';
-                    }
+
+            if (save[index] == '/') {
+                if(save[index-1] != undefined && save[index+1] != undefined ){
+                    result = save[index-1] / save[index+1];
+                    saveControl();
                 }
             }
+            
         }
-    }
-    
-    
+    }  
 }
-
-
 
 function equal(){
         calculation();
@@ -107,8 +92,6 @@ function deleteLast(){
     document.getElementById('operation').innerHTML = 'del';
     display();
 }
-
-
 
 function reset(){
     currentlyOnDisplay = '';
