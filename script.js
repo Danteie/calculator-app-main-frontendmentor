@@ -6,7 +6,11 @@ var root = document.querySelector(':root');
 
 //THEME
 
+
+
+
 function themChenger(number){
+
     switch(number){
        case 1:
             root.style.setProperty('--main-bg','hsl(222, 26%, 31%)');
@@ -20,6 +24,11 @@ function themChenger(number){
             root.style.setProperty('--key-shadow','hsl(28, 16%, 65%)');
             root.style.setProperty('--num-color','hsl(221, 14%, 31%)');
             root.style.setProperty('--white','hsl(360, 100%, 100%)');
+            root.style.setProperty('--white-a','hsl(360, 100%, 100%)');
+            document.getElementById('th1').style.opacity = 1;
+            document.getElementById('th2').style.opacity = 0;
+            document.getElementById('th3').style.opacity = 0;
+
            break;
         case 2:
             root.style.setProperty('--main-bg','hsl(0, 0%, 90%)');
@@ -33,6 +42,9 @@ function themChenger(number){
             root.style.setProperty('--key-shadow','hsl(35, 11%, 61%)');
             root.style.setProperty('--num-color','hsl(60, 10%, 19%)');
             root.style.setProperty('--white','hsl(60, 10%, 19%)');
+            document.getElementById('th1').style.opacity = 0;
+            document.getElementById('th2').style.opacity = 1;
+            document.getElementById('th3').style.opacity = 0;
             break;
         case 3:
             root.style.setProperty('--main-bg','hsl(268, 75%, 9%)');
@@ -47,6 +59,9 @@ function themChenger(number){
             root.style.setProperty('--num-color','hsl(290, 70%, 36%)');
             root.style.setProperty('--white','hsl(52, 100%, 62%)');
             root.style.setProperty('--white-a','hsl(198, 20%, 13%)');
+            document.getElementById('th1').style.opacity = 0;
+            document.getElementById('th2').style.opacity = 0;
+            document.getElementById('th3').style.opacity = 1;
             
             break;
     }

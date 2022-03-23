@@ -55,7 +55,39 @@ main{
     align-items: center;
 }
 
+.theme > p{
+    margin-right: 1em;
+}
+
+.tball{
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    border-radius: 50%;
+    top:1.5px;
+    left:2px;
+    transition: 0.1s;
+  
+}
+
+.t1{ 
+    background: hsl(6, 63%, 50%); 
+    opacity: 1;
+}
+
+.t2{
+    background: hsl(25, 98%, 40%);
+    opacity: 0;
+}
+
+.t3{
+    background:  hsl(176, 100%, 44%);
+    opacity: 0;
+}
+
 .input-theme-button{
+    background-color: var(--toggle-bg);
+    position: relative;
     float: left;
     margin: 0;
     padding: 0;
@@ -77,7 +109,6 @@ main{
     position: relative;
     bottom: 1.5em;
 }
-
 
 /* input */
 
