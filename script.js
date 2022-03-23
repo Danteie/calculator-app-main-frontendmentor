@@ -2,7 +2,7 @@ let currentlyOnDisplay = '';
 let save = [];
 var result = 0;
 var now = '';
-
+let sign = '';
 
 
 function display(){
@@ -18,12 +18,87 @@ function press(key){
     if(logKey == '+' || logKey == '-' || logKey == 'x' || logKey == '/'){
         now = logKey;
         document.getElementById('operation').innerHTML = now;
-        calculation();
+        if (!currentlyOnDisplay) {
+              save.pop();
+              save.push(now);
+        }else{
+            calculation();
+        }
+        
     }else{
         currentlyOnDisplay += logKey;
         display();
     }
     
+}
+
+function calculation(){
+    if(!!currentlyOnDisplay){
+        save.push(parseFloat(currentlyOnDisplay));
+        currentlyOnDisplay = '';
+        save.push(now);
+        console.log('inicijalni save ' + save);
+    
+        for (let index = 0; index < save.length; index++) {
+
+            // plus
+            if (save[index] == '+') {
+                if(save[index-1] != undefined && save[index+1] != undefined ){
+                    result = save[index-1] + save[index+1];
+                    save.splice(0,3)
+                    save.unshift(result);
+                    currentlyOnDisplay = result;
+                    display();
+                    currentlyOnDisplay = '';
+                }
+            }
+            // minus
+            if (save[index] == '-') {
+                if(save[index-1] != undefined && save[index+1] != undefined ){
+                    result = save[index-1] - save[index+1];
+                    save.splice(0,3)
+                    save.unshift(result);
+                    currentlyOnDisplay = result;
+                    display();
+                    currentlyOnDisplay = '';
+                }
+            }
+
+            //puta
+            if (save[index] == 'x') {
+                if(save[index-1] != undefined && save[index+1] != undefined ){
+                    result = save[index-1] * save[index+1];
+                    save.splice(0,3)
+                    save.unshift(result);
+                    currentlyOnDisplay = result;
+                    display();
+                    currentlyOnDisplay = '';
+                }
+            }
+            //djeljeno
+            for (let index = 0; index < save.length; index++) {
+                if (save[index] == '/') {
+                    if(save[index-1] != undefined && save[index+1] != undefined ){
+                        result = save[index-1] / save[index+1];
+                        save.splice(0,3)
+                        save.unshift(result);
+                        currentlyOnDisplay = result;
+                        display();
+                        currentlyOnDisplay = '';
+                    }
+                }
+            }
+        }
+    }
+    
+    
+}
+
+
+
+function equal(){
+        calculation();
+        document.getElementById('operation').innerHTML = '=';
 }
 
 function deleteLast(){
@@ -33,73 +108,6 @@ function deleteLast(){
     display();
 }
 
-
-function calculation(){
-    if(currentlyOnDisplay != NaN){
-    save.push(parseFloat(currentlyOnDisplay));
-    currentlyOnDisplay = '';
-    save.push(now);
-    }
-    
-    for (let index = 0; index < save.length; index++) {
-        if (save[index] == '+') {
-            if(save[index-1] != undefined && save[index+1] != undefined ){
-                result = save[index-1] + save[index+1];
-                save.splice(0,3)
-                save.unshift(result);
-                currentlyOnDisplay = result;
-                display();
-                currentlyOnDisplay = '';
-            }
-        }
-    }
-    
-    for (let index = 0; index < save.length; index++) {
-        if (save[index] == '-') {
-            if(save[index-1] != undefined && save[index+1] != undefined ){
-                result = save[index-1] - save[index+1];
-                save.splice(0,3)
-                save.unshift(result);
-                currentlyOnDisplay = result;
-                display();
-                currentlyOnDisplay = '';
-            }
-        }
-    }
-
-    for (let index = 0; index < save.length; index++) {
-        if (save[index] == 'x') {
-            if(save[index-1] != undefined && save[index+1] != undefined ){
-                result = save[index-1] * save[index+1];
-                save.splice(0,3)
-                save.unshift(result);
-                currentlyOnDisplay = result;
-                display();
-                currentlyOnDisplay = '';
-            }
-        }
-    }
-
-    for (let index = 0; index < save.length; index++) {
-        if (save[index] == '/') {
-            if(save[index-1] != undefined && save[index+1] != undefined ){
-                result = save[index-1] / save[index+1];
-                save.splice(0,3)
-                save.unshift(result);
-                currentlyOnDisplay = result;
-                display();
-                currentlyOnDisplay = '';
-            }
-        }
-    }
-}
-
-
-
-function equal(){
-        calculation();
-        document.getElementById('operation').innerHTML = '=';
-}
 
 
 function reset(){
